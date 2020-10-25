@@ -1,5 +1,7 @@
 # Enunturi exercitii
 
+[Link lab](http://www.aut.upt.ro/~bgroza/teaching/SI/l3.pdf)
+
 1. Form
 
 2. Pentru acest exercițiu fiecare student va trebui să facă parte din cel putin o echipa de trei persoane (dacă este nevoie, puteți face parte din mai multe echipe fără ca efortul să se modifice). În cadrul fiecărei echipe se definesc trei roluri: A, B, și M. Scenariul exercițiului este următorul:
