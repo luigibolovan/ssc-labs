@@ -9,41 +9,38 @@ namespace RSATimings
 {
     class RSACryptosys
     {
-        private RSACryptoServiceProvider mRsa;
-        private AesManaged mAES;
+        private RSA mRsa;
 
-        public RSACryptosys(int bits)
+        public RSACryptosys()
         {
-            mRsa = new RSACryptoServiceProvider(bits);
-            mAES = new AesManaged();
         }
 
-        public byte[] generateAESKey()
+        public void create(int bits)
         {
-            mAES.GenerateKey();
-            return mAES.Key;
+            // Creates a new ephemeral RSA key with the specified key size.
+            mRsa = RSA.Create(bits);
         }
 
         public byte[] encrypt(byte[] msg)
         {
-            return mRsa.Encrypt(msg, true);
+            return mRsa.Encrypt(msg, RSAEncryptionPadding.OaepSHA256);
         }
 
         public byte[] decrypt(byte[] msg)
         {
-            return mRsa.Decrypt(msg, true);
+            return mRsa.Decrypt(msg, RSAEncryptionPadding.OaepSHA256);
         }
 
         public byte[] signData(byte[] msg)
         {
-            SHA256Managed sha256 = new SHA256Managed();
-            return mRsa.SignData(msg, sha256);
+            HashAlgorithmName sha256 = new HashAlgorithmName("SHA256");
+            return mRsa.SignData(msg, sha256, RSASignaturePadding.Pkcs1);
         }
 
         public bool isSignatureOk(byte[] msg, byte[] signature)
         {
-            SHA256Managed sha256 = new SHA256Managed();
-            return mRsa.VerifyData(msg, sha256, signature);
+            HashAlgorithmName sha256 = new HashAlgorithmName("SHA256");
+            return mRsa.VerifyData(msg, signature, sha256, RSASignaturePadding.Pkcs1);
         }
     }
 }
